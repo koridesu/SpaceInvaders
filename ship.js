@@ -22,6 +22,25 @@ function Ship() {
     this.level += 1;
   };
 
-  this.getAccelerator = function () {};
-  this.getDeathZone = function () {};
+  this.getAccelerator = function () {
+    return 7;
+  };
+  this.getDeathZone = function () {
+    return 200;
+  };
+
+  this.isDead = function (alien) {
+    let d = dist(this.x, this.y, alien.x, alien.y);
+    if (d < alien.r + 10) {
+      return true;
+    } else return false;
+  };
+
+  this.destroy = function () {
+    textSize(100);
+    console.log(innerWidth);
+    console.log(innerHeight);
+    text('YOU DEAD', 300, 100);
+    //this = null
+  };
 }

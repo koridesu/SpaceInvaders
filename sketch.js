@@ -3,19 +3,29 @@ function setup() {
   aliens = [];
   shots = [];
 
-  createCanvas(1670, 500);
+  createCanvas(windowWidth, windowHeight / 2);
   for (let i = 0; i < ship.level; i++) {
     aliens[i] = new Alien();
   }
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
 function draw() {
   background(50);
-  ship.show();
+  if (ship) ship.show();
+  else {
+    ship.destroy();
+  }
 
   for (let i = 0; i < aliens.length; i++) {
     aliens[i].show();
-    aliens[i].move(ship.x, ship.y, 10, 100);
+    aliens[i].move(ship.x, ship.y, ship.getAccelerator(), ship.getDeathZone());
+    if (ship.isDead(aliens[i])) {
+      ship.destroy();
+    }
   }
 
   for (let i = 0; i < shots.length; i++) {
