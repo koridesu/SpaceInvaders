@@ -2,10 +2,15 @@ function setup() {
   ship = new Ship();
   aliens = [];
   shots = [];
+  stars = [];
 
-  createCanvas(windowWidth, windowHeight / 2);
+  for (let i = 0; i < 20; i++) {
+    stars.push(new Star());
+  }
+
+  createCanvas(windowWidth, windowHeight / 2 + 200);
   for (let i = 0; i < ship.level; i++) {
-    aliens[i] = new Alien();
+    aliens[i] = new Alien(ship.level);
   }
 }
 
@@ -15,10 +20,23 @@ function windowResized() {
 
 function draw() {
   background(50);
-  if (ship) ship.show();
-  else {
-    ship.destroy();
+
+  for (let i = 0; i < stars.length; i++) {
+    stars[i].show();
+    stars[i].move();
+    if (stars[i].x < 0) {
+      stars.splice(i, 1);
+      stars.push(new Star());
+    }
   }
+
+  if (ship.dead) {
+    textSize(100);
+
+    text('YOU DEAD', windowWidth / 2 - 230, windowHeight / 2);
+    return;
+  }
+  ship.show();
 
   for (let i = 0; i < aliens.length; i++) {
     aliens[i].show();
@@ -70,6 +88,6 @@ function keyPressed() {
 function levelHandler(ship, aliens) {
   ship.levelUp();
   for (let i = 0; i < ship.level; i++) {
-    aliens[i] = new Alien();
+    aliens[i] = new Alien(ship.level);
   }
 }

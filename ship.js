@@ -1,7 +1,7 @@
 function Ship() {
   this.level = 1;
   this.score = 0;
-
+  this.dead = false;
   this.y = height / 2;
   this.x = 20;
 
@@ -37,10 +37,7 @@ function Ship() {
   };
 
   this.destroy = function () {
-    textSize(100);
-    console.log(innerWidth);
-    console.log(innerHeight);
-    text('YOU DEAD', 300, 100);
-    //this = null
+    this.dead = true;
+    //TODO: impelement animation
   };
 }

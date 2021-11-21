@@ -1,7 +1,7 @@
 function Alien(speed = 100) {
   this.speed = speed;
   this.r = 15;
-
+  console.log(this.speed);
   this.spawn = function () {
     const arbital = Math.floor(Math.random() * 2);
 
@@ -11,7 +11,7 @@ function Alien(speed = 100) {
       this.y = Math.floor(Math.random() * 50) + 600;
     }
 
-    this.x = Math.floor(Math.random() * 10) + 600;
+    this.x = Math.floor(Math.random() * 200) + 1500;
   };
   this.spawn();
 
@@ -21,7 +21,7 @@ function Alien(speed = 100) {
   };
 
   this.move = function (x, y, accelarator, deathLimit) {
-    move = 1;
+    move = this.speed / 10;
 
     if (this.x !== x) {
       farkX = this.x - x;
@@ -40,7 +40,5 @@ function Alien(speed = 100) {
       }
       this.y = this.y - (farkY * move) / 100;
     }
-
-    //TODO: implement
   };
 }
