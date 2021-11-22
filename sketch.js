@@ -21,6 +21,19 @@ function windowResized() {
 function draw() {
   background(50);
 
+  if (keyIsDown(UP_ARROW)) {
+    ship.move(0, -1);
+  }
+  if (keyIsDown(DOWN_ARROW)) {
+    ship.move(0, 1);
+  }
+  if (keyIsDown(LEFT_ARROW)) {
+    ship.move(-1, 0);
+  }
+  if (keyIsDown(RIGHT_ARROW)) {
+    ship.move(1, 0);
+  }
+
   for (let i = 0; i < stars.length; i++) {
     stars[i].show();
     stars[i].move();
@@ -68,18 +81,18 @@ function draw() {
 }
 
 function keyPressed() {
-  if (keyCode === UP_ARROW) {
-    ship.move(0, -1);
-  }
-  if (keyCode === DOWN_ARROW) {
-    ship.move(0, 1);
-  }
-  if (keyCode === LEFT_ARROW) {
-    ship.move(-1, 0);
-  }
-  if (keyCode === RIGHT_ARROW) {
-    ship.move(1, 0);
-  }
+  // if (keyCode === UP_ARROW) {
+  //   ship.move(0, -1);
+  // }
+  // if (keyCode === DOWN_ARROW) {
+  //   ship.move(0, 1);
+  // }
+  // if (keyCode === LEFT_ARROW) {
+  //   ship.move(-1, 0);
+  // }
+  // if (keyCode === RIGHT_ARROW) {
+  //   ship.move(1, 0);
+  // }
   if (keyCode === 32) {
     shots.push(new Shot(ship.x, ship.y, 'fire', 5));
   }

@@ -1,8 +1,8 @@
 function Shot(x, y, type, bulletSpeed) {
   this.type = type;
   this.bulletSpeed = bulletSpeed;
-  this.x = x;
-  this.y = y;
+  this.x = x + 10;
+  this.y = y + 10;
   this.r = 5;
 
   this.shotBullet = function () {};

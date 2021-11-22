@@ -14,8 +14,8 @@ function Ship() {
   };
 
   this.move = function (x, y) {
-    this.x += x * 50;
-    this.y += y * 50;
+    this.x += x * 5;
+    this.y += y * 5;
   };
 
   this.levelUp = function () {
