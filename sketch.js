@@ -4,6 +4,9 @@ function setup() {
   shots = [];
   stars = [];
   particles = [];
+  button = createButton('Retry');
+  button.position(windowWidth/2, windowHeight/2 + 200);
+  button.mousePressed(setup);
 
   for (let i = 0; i < 20; i++) {
     stars.push(new Star());
@@ -46,7 +49,6 @@ function draw() {
 
   if (ship.dead) {
     textSize(100);
-
     text('YOU DEAD', windowWidth / 2 - 230, windowHeight / 2);
     return;
   }
