@@ -94,6 +94,11 @@ function draw() {
   }
 }
 
+function touchStarted(){
+  ship.move(1,0);
+
+}
+
 function keyPressed() {
   // if (keyCode === UP_ARROW) {
   //   ship.move(0, -1);
