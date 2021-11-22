@@ -109,7 +109,7 @@ function keyPressed() {
   // }
   if (keyCode === 32) {
     for (let i = 0; i < 4; i++) {
-      particles.push(new Particle(ship.x, ship.y, 73, 106, 208));
+      particles.push(new Particle(ship.x, ship.y, 255 , 255 , 0));
     }
     shots.push(new Shot(ship.x, ship.y, 'fire', 7));
   }

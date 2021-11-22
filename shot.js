@@ -8,7 +8,7 @@ function Shot(x, y, type, bulletSpeed) {
   this.shotBullet = function () {};
 
   this.show = function () {
-    fill(250, 255, 0);
+    fill(25, 0, 51);
     ellipse(this.x, this.y, this.r * 2, this.r * 2);
   };
 
