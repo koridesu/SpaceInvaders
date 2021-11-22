@@ -3,6 +3,7 @@ function setup() {
   aliens = [];
   shots = [];
   stars = [];
+  particles = [];
 
   for (let i = 0; i < 20; i++) {
     stars.push(new Star());
@@ -59,6 +60,13 @@ function draw() {
     }
   }
 
+  for (let i = 0; i < particles.length; i++) {
+    particles[i].show();
+    particles[i].move();
+
+    if (particles[i].isExpired()) particles.splice(i, 1);
+  }
+
   for (let i = 0; i < shots.length; i++) {
     shots[i].show();
     shots[i].move();
@@ -66,8 +74,12 @@ function draw() {
       shots.splice(i, 1);
       break;
     }
+
     for (let j = 0; j < aliens.length; j++) {
       if (shots[i].isHit(aliens[j])) {
+        for (let i = 0; i < 6; i++) {
+          particles.push(new Particle(aliens[j].x, aliens[j].y, 255, 0, 0));
+        }
         aliens.splice(j, 1);
         shots.splice(i, 1);
         break;
@@ -94,7 +106,10 @@ function keyPressed() {
   //   ship.move(1, 0);
   // }
   if (keyCode === 32) {
-    shots.push(new Shot(ship.x, ship.y, 'fire', 5));
+    for (let i = 0; i < 4; i++) {
+      particles.push(new Particle(ship.x, ship.y, 73, 106, 208));
+    }
+    shots.push(new Shot(ship.x, ship.y, 'fire', 7));
   }
 }
 
