@@ -5,8 +5,9 @@ function setup() {
   stars = [];
   particles = [];
   button = createButton('Retry');
-  button.position(windowWidth/2, windowHeight/2 + 200);
-  button.mousePressed(setup);
+  button.position(windowWidth / 2, windowHeight / 2 + 200);
+  lock = true;
+  button.mousePressed(retry);
 
   for (let i = 0; i < 20; i++) {
     stars.push(new Star());
@@ -25,16 +26,22 @@ function windowResized() {
 function draw() {
   background(50);
 
+  if (lock) ship.reachTarget();
+
   if (keyIsDown(UP_ARROW)) {
+    lock = false;
     ship.move(0, -1);
   }
   if (keyIsDown(DOWN_ARROW)) {
+    lock = false;
     ship.move(0, 1);
   }
   if (keyIsDown(LEFT_ARROW)) {
+    lock = false;
     ship.move(-1, 0);
   }
   if (keyIsDown(RIGHT_ARROW)) {
+    lock = false;
     ship.move(1, 0);
   }
 
@@ -114,9 +121,14 @@ function keyPressed() {
   // }
   if (keyCode === 32) {
     for (let i = 0; i < 4; i++) {
-      particles.push(new Particle(ship.x, ship.y, 255 , 255 , 0));
+      particles.push(new Particle(ship.x, ship.y, 255, 255, 0));
     }
     shots.push(new Shot(ship.x, ship.y, 'fire', 7));
+  }
+}
+function touchStarted(fn) {
+  if (fn.clientX > 0 && fn.clientY < windowHeight / 2 + 200) {
+    ship.mobileMove(fn.clientX, fn.clientY);
   }
 }
 
@@ -125,4 +137,8 @@ function levelHandler(ship, aliens) {
   for (let i = 0; i < ship.level; i++) {
     aliens[i] = new Alien(ship.level);
   }
+}
+function retry() {
+  lock = false;
+  setup();
 }
